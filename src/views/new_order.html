@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import navbar %}
+
+{% block main %}
+{{ navbar('/dos', school) }}
+
+<div class="container">
+  {% for error in messages.errors %}
+  <div class="alert alert-danger d-flex align-items-center" role="alert">
+    <div>
+      {{ error }}
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  {% endfor %}
+  <div class="row">
+
+    <div class="col-6 offset-2">
+      <h3>Nuevo Pedido</h3>
+      <form action="/new_order" method="post" class="rounded p-1 text-white">
+
+        <div class=" ">
+          <input id="school_id" type="number" class="form-control" name="school_id"
+            value={{school.id}} hidden>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <div class=" ">
+            <label for="" class="form-label">
+              <h5>vegetarianos</h5>
+            </label>
+            <input id="vegetarianos" type="number" class="form-control" name="vegetarianos"
+              placeholder="M.Vegetarianos">
+          </div>
+
+          <div class=" ">
+            <label for="" class="form-label">
+              <h5>calorico</h5>
+            </label>
+            <input id="calorico" type="number" class="form-control" name="calorico" placeholder="M.Calórico">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+
+          <div class=" ">
+            <label for="" class="form-label">
+              <h5>celiacos</h5>
+            </label>
+            <input id="celiacos" type="number" class="form-control" name="celiacos" placeholder="M.Celiacos">
+          </div>
+
+          <div class=" ">
+            <label for="" class="form-label">
+              <h5>autoctono</h5>
+            </label>
+            <input id="autoctono" type="number" class="form-control" name="autoctono" placeholder="M.Autóctono">
+          </div>
+
+        </div>
+        <div class="d-flex justify-content-between">
+          <div class=" ">
+            <label for="" class="form-label">
+              <h5>estandar</h5>
+            </label>
+            <input id="estandar" type="number" class="form-control" name="estandar" placeholder="M.Estandar">
+          </div>
+
+          <div class="mb-3">
+            <label for="" class="form-label">
+              <h5>fecha</h5>
+            </label>
+            <label for="" class="form-label">fecha</label>
+            <input type="text" class="form-control" name="fecha" placeholder="{{timestamp}}" value={{timestamp}} required>
+            {{timestamp}}
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end mb-5">
+          <button type="submit" class="btn btn-outline-primary">Agregar</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+  {% endblock %}
