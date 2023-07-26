@@ -1,10 +1,11 @@
 import express from "express"
 import morgan from "morgan"
 import helmet from "helmet"
-import nunjucks from "nunjucks"
+import favicon from "serve-favicon"
 import flash from "connect-flash"
-import path from "path"
-import { fileURLToPath } from 'url';
+import nunjucks from "nunjucks" //usar templates
+import path from "path" //para trabajar con rutas de archivos y directorios
+import { fileURLToPath } from 'url' //el objeto de URL para convertir en una ruta
 
 import index from "./routes/index.js"
 import {APP_NAME} from "./config.js"
@@ -12,8 +13,10 @@ import new_order from "./routes/new_order.js" // no usar new solo (palabra reser
 
 const app = express()
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url) //obtenga el nombre del archivo con la ruta absoluta completa del archivo
+const __dirname = path.dirname(__filename) //Obtiene el nombre completo del directorio donde se encuentra el archivo
+console.log('ruta comp arch', __filename) //C:\Users\mao\Desktop\menu\src\app.js
+console.log('directorio del arch', __dirname) //C:\Users\mao\Desktop\menu\src
 
 // Middlewares
 app.use(morgan("dev")) // ver datos en consola
@@ -25,19 +28,21 @@ app.use(flash()) // se configura uso de mensajes flash
 // se configuran archivos estáticos
 app.use(express.static('./node_modules/bootstrap/dist'))
 app.use(express.static('./public'))
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
-// se configura nunjucks
+
+// se configura nunjucks //directorio views q contiene templates
 const nunj_env = nunjucks.configure(path.resolve(__dirname, "views"), {
   express: app,
   autoscape: true,
   noCache: true,
   watch: true,
 });
-nunj_env.addGlobal('app_name', APP_NAME) // var global *****
+nunj_env.addGlobal('app_name', APP_NAME) // app_name var global *****
 
 // Routes
 app.use("/", index)
-app.use('/orders', new_order)
+app.use('/', new_order) //orders (prefijo) , pierde bootstrap
 
 /* app.use("/api", jobs); // prefijo
 app.use("/api/auth", auth); // signup y signin *** */

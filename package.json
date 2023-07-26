@@ -21,7 +21,8 @@
     "jsonwebtoken": "^9.0.1",
     "moment": "^2.29.4",
     "mysql2": "^3.5.2",
-    "nunjucks": "^3.2.4"
+    "nunjucks": "^3.2.4",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",

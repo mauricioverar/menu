@@ -14,7 +14,7 @@ const router = Router()
 
 const timestamp = moment(new Date).format('DD/MM/YYYY')
 
-const usuario = {name: 'mao'}
+const usuario = { name: 'mao' }
 // const usuario = ''
 console.log('new')
 function protected_route(req, res, next) {
@@ -32,9 +32,24 @@ function protected_route(req, res, next) {
 // router.get('/jobs', protected_route, getJobs)
 
 // new_order GET
-router.get('/new_order', protected_route, (req, res) => {
-    res.render('new_order.html', { timestamp })
-  })
+/* router.get('/new', protected_route, (req, res) => {
+    console.log('new_order')
+    const school = { id: 1, name: 'Leon', is_admin: false, liceo: '' }
+    res.render('new_order.html', { school, timestamp })
+}) */
+
+router.get('/new_order', protected_route, async (req, res) => {
+    console.log('new_order')
+    const school = { id: 1, name: 'Leon', is_admin: false, liceo: '' }
+
+    try {
+
+        res.render('new_order.html', { school })
+
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 // GET An Job
 // router.get("/jobs/:id", protected_route, getJob);
