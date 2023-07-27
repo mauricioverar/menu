@@ -26,7 +26,9 @@
 </nav>
 <script>
   const us = document.querySelector('.usuario')
-  if (us.innerHTML == 'true') {
+  console.log('user')
+  if (us.innerHTML == true) {
+    console.log('true')
     const bton_add = document.querySelector('.btn_add')
     bton_add.removeAttribute('hidden')
   }

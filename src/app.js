@@ -2,13 +2,13 @@ import express from "express"
 import morgan from "morgan"
 import helmet from "helmet"
 import favicon from "serve-favicon"
-import flash from "connect-flash"
 import nunjucks from "nunjucks" //usar templates
 import path from "path" //para trabajar con rutas de archivos y directorios
 import { fileURLToPath } from 'url' //el objeto de URL para convertir en una ruta
 
-import index from "./routes/index.js"
 import {APP_NAME} from "./config.js"
+import auth from "./routes/auth.js"
+// import index from "./routes/index.js"
 import new_order from "./routes/new_order.js" // no usar new solo (palabra reservada)
 
 const app = express()
@@ -23,7 +23,6 @@ app.use(morgan("dev")) // ver datos en consola
 app.use(express.json()) // interpretar json
 app.use(express.urlencoded({extended: true})) // se configura uso de formularios
 app.use(helmet()) // ocultar info sobre versiones y validar
-app.use(flash()) // se configura uso de mensajes flash
 
 // se configuran archivos estáticos
 app.use(express.static('./node_modules/bootstrap/dist'))
@@ -41,7 +40,8 @@ const nunj_env = nunjucks.configure(path.resolve(__dirname, "views"), {
 nunj_env.addGlobal('app_name', APP_NAME) // app_name var global *****
 
 // Routes
-app.use("/", index)
+app.use("/", auth) //index
+// app.use("/", index) //index
 app.use('/', new_order) //orders (prefijo) , pierde bootstrap
 
 /* app.use("/api", jobs); // prefijo
