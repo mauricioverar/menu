@@ -34,8 +34,9 @@ const usuario = { name: 'mao' }
 
 // está logueado o no
 function protected_route(req, res, next) {
-    // console.log('schoo', school)
-    if (!school) {
+    console.log('schoo', school)
+    // !school
+    if (school.name == 'Visitante') {
 
         console.log('protectRute')
         msg = 'Debe loguearse primero'
@@ -236,6 +237,22 @@ router.post('/new_order', protected_route, async (req, res) => {
     // return res.redirect('/')
 
 })
+
+// rectify POST
+router.post('/rectify', protected_route, (req, res) => {
+    console.log(req.body)
+    const orden = req.body.orden
+    const fecha = req.body.fecha
+    console.log('fecha rect ', req.body.fecha) // jun // Jun 09, 2023
+    // console.log('fecha rect ', req.query.fecha) // jun
+    const vegetarian = req.body.vegetarian
+    const celiac = req.body.celiac
+    const standard = req.body.standard
+    const caloric = req.body.caloric
+    const ethnic = req.body.ethnic
+    console.log('rec ',fecha)
+    res.render('rectify.html', { school, orden, fecha, vegetarian, celiac, standard, caloric, ethnic })
+  })
 
 router.get('/logout', (req, res) => {
     school = { name: 'Visitante', is_admin: 0 }

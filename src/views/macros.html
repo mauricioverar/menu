@@ -10,17 +10,9 @@
         <!-- <li class="nav-item">
           <a class="nav-link {% if ruta == '/' %}active{% endif %}" aria-current="page" href="/">Home</a>
         </li> -->
-        <li class="nav-item">
-          <!-- <a class="btn_add nav-link {% if ruta == '/new_order' %}active{% endif %}" href="/orders/new" hidden>Ingresar datos</a> -->
-          <a class="btn_add nav-link {% if ruta == '/new_order' %}active{% endif %}" href="/new_order" hidden>Ingresar datos</a>
-        </li>
       </ul>
-      <form class="d-flex" role="search">
-        <!-- <p class="text-white me-4">{{ school.name }}</p> -->
-        <p class="usuario text-white me-4" hidden>{{ school.is_admin}}</p>
+      <a href="/logout" class="btn btn-outline-danger" type="submit">Logout</a>
 
-        <a href="/logout" class="btn btn-outline-danger" type="submit">Logout</a>
-      </form>
     </div>
   </div>
 </nav>
