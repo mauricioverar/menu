@@ -62,7 +62,7 @@ export async function get_order(email) {
       `select * from orders where email = ?`,
       [email]
     )
-    console.log(rows[0])
+    // console.log(rows[0])
     if (rows[0].is_admin == 1) console.log(rows[0].is_admin)
 
     // 4. retorno el primer usuario, en caso de que exista
@@ -76,7 +76,7 @@ export async function get_order(email) {
 
 export async function create_order(date, is_rectified, observations, school_id, vegetarianos, celiacos, estandar, calorico, autoctono) {
   console.log('export create_order ')
-  console.log(date, is_rectified, observations, school_id, vegetarianos, celiacos, estandar, calorico, autoctono)
+  // console.log(date, is_rectified, observations, school_id, vegetarianos, celiacos, estandar, calorico, autoctono)
   let resp
 
   try {
@@ -85,6 +85,34 @@ export async function create_order(date, is_rectified, observations, school_id, 
       (date, is_rectified, observations, school_id, vegetarian, celiac, standard, caloric, ethnic)
       values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [date, is_rectified, observations, school_id, vegetarianos, celiacos, estandar, calorico, autoctono]
+    )
+
+    // 3. Devuelvo el cliente al pool
+
+    console.log('export create_order ok')
+
+    return resp[0]
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function update_order(is_rectified, observations,
+  vegetarian, celiac, standard, caloric, ethnic,
+  vegetarianos, celiacos, estandar, calorico, autoctono, id_orden) {
+  console.log('export update_order ')
+  let resp
+
+  try {
+    [resp] = await pool.query(
+      `update orders SET
+      is_rectified = ?, observations = ?,
+      vegetarian = ?, celiac = ?, standard = ?, caloric = ?, ethnic  = ?,
+      ped_vegetarian = ?, ped_celiac = ?, ped_standard = ?, ped_caloric = ?, ped_ethnic  = ?
+      WHERE id_order = ?`,
+      [is_rectified, observations, 
+        vegetarian, celiac, standard, caloric, ethnic,
+        vegetarianos, celiacos, estandar, calorico, autoctono, id_orden]
     )
 
     // 3. Devuelvo el cliente al pool
@@ -108,7 +136,7 @@ export async function get_orders () {
     )
   
     // 4. retorno el primer usuario, en caso de que exista
-    console.log(rows)
+    // console.log(rows)
     return rows//[0]
   } catch (error) {
     console.log(error)

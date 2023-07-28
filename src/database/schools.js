@@ -15,7 +15,7 @@ export const get_schools = async (req, res) => {
       [email]
     )
 
-    console.log(user_find[0])
+    // console.log(user_find[0])
 
     if (!user_find[0]) return res.status(400).json({ message: "Usuario o contraseña incorrecta" });
 
@@ -31,8 +31,8 @@ export const get_schools = async (req, res) => {
       expiresIn: 86400, // 24 hours
     });
 
-    console.log(user_find[0])
-    console.log('id_user', user_find[0].id_user)
+    // console.log(user_find[0])
+    // console.log('id_user', user_find[0].id_user)
     // roles del usuario
     const [user_roles] = await pool.query(
       `SELECT  rolename
@@ -44,8 +44,8 @@ export const get_schools = async (req, res) => {
     )
 
     // user_roles=[ { rolename: 'admin' }, { rolename: 'user' }, { rolename: 'super' } ]
-    console.log('roles de este usuario:')
-    user_roles.map(roles => console.log(roles.rolename)) // admin
+    // console.log('roles de este usuario:')
+    // user_roles.map(roles => console.log(roles.rolename)) // admin
 
 
     res.json({ token }); // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODk5NzUwNDYsImV4cCI6MTY5MDA2MTQ0Nn0.Jbzi-0CukleAzhuNdmUqIQ5qyCWr50EF7ekgSimJod4
@@ -62,7 +62,7 @@ export async function get_school(email) {
       `select * from schools where email = ?`,
       [email]
     )
-    console.log(rows[0])
+    // console.log(rows[0])
     if (rows[0].is_admin == 1) console.log(rows[0].is_admin)
 
     // 4. retorno el primer usuario, en caso de que exista
@@ -81,7 +81,7 @@ export async function get_school_name(name) {
       `select * from schools where name = ?`,
       [name]
     )
-    console.log(rows[0])
+    // console.log(rows[0])
     if (rows[0].is_admin == 1) console.log(rows[0].is_admin)
 
     // 4. retorno el primer usuario, en caso de que exista
@@ -94,8 +94,8 @@ export async function get_school_name(name) {
 }
 
 export async function create_school(name, email, password, is_admin) {
-  console.log('export create_school ')
-  console.log(name, email, password, is_admin)
+  // console.log('export create_school ')
+  // console.log(name, email, password, is_admin)
   let resp
 
   try {
@@ -106,8 +106,8 @@ export async function create_school(name, email, password, is_admin) {
 
     // 3. Devuelvo el cliente al pool
 
-    console.log('export create_school ok')
-    console.log(resp.insertId)//[0]) // id
+    // console.log('export create_school ok')
+    // console.log(resp.insertId)//[0]) // id
 
     return resp.insertId
   } catch (error) {

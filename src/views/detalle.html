@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import navbar %}
+
+{% block main %}
+{{ navbar('/dos', school) }}
+<!-- {{ school.is_admin}}  -->
+<div class="container">
+
+  {% if msg %}
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+      <div>
+        {{ msg }}
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %}
+
+  <div class="row">
+
+    <div class="col-8 offset-2">
+      <h4 class="my-3">Detalle del pedido {{orden}} (ordenado el {{fecha}})</h4>
+
+      <!-- <div class="col-6 offset-2"> -->
+      <div class="rounded p-1 text-black ">
+        <!-- <form action="/new_order" method="put" class="rounded p-1 text-black "> -->
+        <div class="border border-2 border-dark ps-2 pe-2">
+
+          <div class=" ">
+            <input id="id_orden" type="number" class="form-control" name="id_orden" value={{orden}} hidden>
+          </div>
+
+          <div class=" ">
+            <input id="school_id" type="number" class="form-control" name="school_id" value={{school.id}} hidden>
+          </div>
+
+          <div class="">
+            <div class="mt-2 d-flex justify-content-between">
+              <h6 class="ms-2">Menús Vegetarianos: Se ordenaron {{ped_vegetarianos}}, se consumieron  {{vegetarianos}}
+            </div>
+            <div class="mt-2 d-flex justify-content-between">
+              <h6 class="ms-2">Menús Celiacos: Se ordenaron {{ped_celiacos}}, se consumieron  {{celiacos}}
+            </div>
+            <div class="mt-2 d-flex justify-content-between">
+              <h6 class="ms-2">Menús Estándar: Se ordenaron {{ped_estandar}}, se consumieron  {{estandar}}
+            </div>
+            <div class="mt-2 d-flex justify-content-between">
+              <h6 class="ms-2">Menús Calórico: Se ordenaron {{ped_calorico}}, se consumieron  {{calorico}}
+            </div>
+            <div class="mt-2 d-flex justify-content-between">
+              <h6 class="ms-2">Menús Étnicos: Se ordenaron {{ped_autoctono}}, se consumieron  {{autoctono}}
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between my-2 ms-2">
+            <h6>Se perdieron en total {{perdida}} raciones</h6>
+            <button class="btn btn-outline-info"><a href="/" class="auth-text text-dark">Volver a Home</a></button>
+            <!-- <button name="rectificar" id="rectificar" class="btn btn-outline-primary"
+              onclick="volverHome()">Volver a Home</button> -->
+            <!-- <button type="submit" name="rectificar" id="rectificar" class="btn btn-outline-primary" >Rectificar</button> -->
+            <!-- onclick="volverHome()" -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  /* const agregarlikes = async (ev, id) => {
+    ev.preventDefault()
+
+    console.log('id ', id);
+
+    const h6_lk = document.getElementById(`lkk${id}`)
+
+    // let num_likes = parseInt(span_memsaje.innerHTML)
+    let num_likes = parseInt(h6_lk.innerHTML)
+
+    num_likes++
+    h6_lk.innerHTML = num_likes
+    await fetch(`/like/${id}`, {
+      method: "POST",
+      body: JSON.stringify({
+        id,
+      }),
+    })
+  } */
+
+
+  const volverHome = async () => {
+    console.log('volverHome')
+    location.href = '/';
+
+  };
+</script>
+{% endblock %}

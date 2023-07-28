@@ -48,7 +48,25 @@
                 <td>{{orden.caloric}}</td>
                 <td>{{orden.ethnic}}</td>
                 <td>
-                  <button type="submit" class="btn btn-outline-primary">Ver Detalle</button>
+                  <form action="/detalle" method="post">
+                    <input id="orden" type="number" class="form-control" name="orden" value={{orden.id_order}} hidden>
+                    <input id="fecha" type="text" class="form-control" name="fecha" value="{{orden.date}}" hidden>
+      
+                    <input type="number" class="form-control" name="vegetarian" value={{orden.vegetarian}} hidden>
+                    <input type="number" class="form-control" name="celiac" value={{orden.celiac}} hidden>
+                    <input type="number" class="form-control" name="standard" value={{orden.standard}} hidden>
+                    <input type="number" class="form-control" name="caloric" value={{orden.caloric}} hidden>
+                    <input type="number" class="form-control" name="ethnic" value={{orden.ethnic}} hidden>
+
+                    <input type="number" class="form-control" name="ped_vegetarian" value={{orden.ped_vegetarian}} hidden>
+                    <input type="number" class="form-control" name="ped_celiac" value={{orden.ped_celiac}} hidden>
+                    <input type="number" class="form-control" name="ped_standard" value={{orden.ped_standard}} hidden>
+                    <input type="number" class="form-control" name="ped_caloric" value={{orden.ped_caloric}} hidden>
+                    <input type="number" class="form-control" name="ped_ethnic" value={{orden.ped_ethnic}} hidden>
+      
+                    <button type="submit" class="btn btn-outline-primary">Detalle</button>
+      
+                  </form>
                 </td>
               </tr>
               {% else %}
@@ -87,7 +105,7 @@
               <td>{{orden.caloric}}</td>
               <td>{{orden.ethnic}}</td>
               <td>
-                <button class="btn btn-outline-info"><a href="/login" class="auth-text text-dark">Login</a></button>
+                <button class="btn btn-outline-info"><a href="/login" class="auth-text text-dark">Acceder</a></button>
               </td>
             </tr>
             {%endif%}

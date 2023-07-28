@@ -10,7 +10,8 @@ import {
 } from "../database/schools.js"
 import {
     create_order,
-    get_orders
+    get_orders,
+    update_order
 } from "../database/orders.js"
 
 const router = Router()
@@ -34,7 +35,7 @@ const usuario = { name: 'mao' }
 
 // está logueado o no
 function protected_route(req, res, next) {
-    console.log('schoo', school)
+    // console.log('schoo', school)
     // !school
     if (school.name == 'Visitante') {
 
@@ -51,7 +52,7 @@ router.get('/', async (req, res) => { //protected_route,
     try {
         const ordenes = await get_orders()
         console.log('ordenes', ordenes)
-        if (!ordenes) return res.render('index.html', {school}) // estado inicial
+        if (!ordenes) return res.render('index.html', { school }) // estado inicial
         console.log(ordenes.length, 'ordenes')
         // let fechas = []
         ordenes.forEach((item) => {
@@ -63,8 +64,8 @@ router.get('/', async (req, res) => { //protected_route,
             // console.log('item index fecha ',moment(item.fecha).format('DD/MM/YYYY') ) // 11/06/2023
             console.log('rectificado?', item.is_rectified, item.date)
         })
-        console.log(school)
-        console.log(fechas)
+        // console.log(school)
+        // console.log(fechas)
         res.render('index.html', { school, ordenes, fechas })
     } catch (error) {
         console.log(error)
@@ -94,7 +95,7 @@ router.get('/register', (req, res) => {
 router.post('/login', async (req, res) => {
     // 1. me traigo los datos del formulario
     const email = req.body.email.trim()
-    console.log('req.body.password', req.body)
+    // console.log('req.body.password', req.body)
     const password = req.body.password.trim()
 
     // 2. intento buscar al usuario en base a su email 
@@ -122,14 +123,14 @@ router.post('/login', async (req, res) => {
         id: school_buscado.id_school,
         is_admin: school_buscado.is_admin
     }
-    console.log('Usuario ok ', school)
+    // console.log('Usuario ok ', school)
 
     return res.redirect('/')
 })
 
 router.post('/register', async (req, res) => {
     // 1. me traigo los datos del formulario
-    console.log(req.body)
+    // console.log(req.body)
     const name = req.body.name.trim()
     const email = req.body.email.trim()
     const password = req.body.password.trim()
@@ -161,7 +162,7 @@ router.post('/register', async (req, res) => {
     // 5. Finalmente lo agregamos a la base de datos
     const encrypted_pass = await bcrypt.hash(password, 10)
     const new_school = await create_school(name, email, encrypted_pass, is_admin)
-    console.log(new_school) //  nuevo id
+    // console.log(new_school) //  nuevo id
     /* school = { id: new_school.id_school, name, email }
     console.log('school', school) */
     is_admin = 0
@@ -172,9 +173,9 @@ router.post('/register', async (req, res) => {
 })
 
 router.get('/new_order', protected_route, async (req, res) => {
-    console.log('new_order')
+    console.log('new_order GET')
     try {
-        console.log('school', school)
+        // console.log('school', school)
         res.render('new_order.html', { timestamp, school })
     } catch (error) {
         console.log(error)
@@ -185,9 +186,10 @@ router.get('/new_order', protected_route, async (req, res) => {
 router.post('/new_order', protected_route, async (req, res) => {
     try {
 
-        console.log(req.body)
+        console.log('new_order POST')
+        // console.log(req.body)
         if (school.is_admin == 1) {
-            console.log(req.body.school_id)
+            // console.log(req.body.school_id)
             console.log('fecha de new ', req.body.fecha) // ok '2023-06-10'
             const date = req.body.fecha
             console.log(date) // ok '2023-06-10'
@@ -244,15 +246,88 @@ router.post('/rectify', protected_route, (req, res) => {
     const orden = req.body.orden
     const fecha = req.body.fecha
     console.log('fecha rect ', req.body.fecha) // jun // Jun 09, 2023
+    console.log('vegetarianos_rect', vegetarianos)
     // console.log('fecha rect ', req.query.fecha) // jun
-    const vegetarian = req.body.vegetarian
-    const celiac = req.body.celiac
-    const standard = req.body.standard
-    const caloric = req.body.caloric
-    const ethnic = req.body.ethnic
-    console.log('rec ',fecha)
-    res.render('rectify.html', { school, orden, fecha, vegetarian, celiac, standard, caloric, ethnic })
-  })
+    vegetarianos = req.body.vegetarian
+    celiacos = req.body.celiac
+    estandar = req.body.standard
+    calorico = req.body.caloric
+    autoctono = req.body.ethnic
+
+    console.log('rec ', fecha)
+    console.log('vegetarianos rectify', vegetarianos)
+
+    res.render('rectify.html', { school, orden, fecha, vegetarianos, celiacos, estandar, calorico, autoctono })
+})
+
+// Actualizar new_order
+router.post('/order_rectify', async (req, res) => {
+    try {
+        const id_orden = req.body.id_orden;
+        console.log('id_orden PUT', id_orden)
+        console.log('PUT', req.body)
+        let vegetarian = req.body.vegetarianos
+        if (vegetarian == '') { vegetarian = 0 }
+        let caloric = req.body.calorico
+        if (caloric == '') { caloric = 0 }
+        let celiac = req.body.celiacos
+        if (celiac == '') { celiac = 0 }
+        let ethnic = req.body.autoctono
+        if (ethnic == '') { ethnic = 0 }
+        let standard = req.body.estandar
+        if (standard == '') { standard = 0 }
+
+        const observations = req.body.observaciones
+        const is_rectified = 1
+
+        console.log('vegetarianos put', vegetarianos)
+
+        await update_order(is_rectified, observations,
+            vegetarian, celiac, standard, caloric, ethnic,
+            vegetarianos, celiacos, estandar, calorico, autoctono, id_orden)
+
+        res.redirect('/')
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+// Detalle
+router.post('/detalle', async (req, res) => {
+    try {
+        console.log('detalle', req.body)
+
+        // orden = req.body.orden // school,
+        const orden = req.body.orden
+        const fecha = req.body.fecha
+
+        vegetarianos = parseInt(req.body.vegetarian)
+        celiacos = parseInt(req.body.celiac)
+        estandar = parseInt(req.body.standard)
+        calorico = parseInt(req.body.caloric)
+        autoctono = parseInt(req.body.ethnic)
+
+        const ped_vegetarianos = parseInt(req.body.ped_vegetarian)
+        const ped_celiacos = parseInt(req.body.ped_celiac)
+        const ped_estandar = parseInt(req.body.ped_standard)
+        const ped_calorico = parseInt(req.body.ped_caloric)
+        const ped_autoctono = parseInt(req.body.ped_ethnic)
+
+        const perdida = (ped_vegetarianos + ped_celiacos + ped_estandar + ped_calorico + ped_autoctono) - (vegetarianos + celiacos + estandar + calorico + autoctono)
+
+        console.log(perdida)
+
+        res.render('detalle.html', {
+            orden, fecha, school,
+            vegetarianos, celiacos, estandar, calorico, autoctono,
+            ped_vegetarianos, ped_celiacos, ped_estandar, ped_calorico, ped_autoctono, perdida
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 router.get('/logout', (req, res) => {
     school = { name: 'Visitante', is_admin: 0 }

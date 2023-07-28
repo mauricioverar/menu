@@ -7,12 +7,12 @@
 <div class="container">
 
   {% if msg %}
-    <div class="alert alert-danger d-flex align-items-center" role="alert">
-      <div>
-        {{ msg }}
-      </div>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <div class="alert alert-danger d-flex align-items-center" role="alert">
+    <div>
+      {{ msg }}
     </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
   {% endif %}
 
   <div class="row">
@@ -21,128 +21,76 @@
       <h4 class="my-3">Rectificación del pedido {{orden}} (ordenado el {{fecha}})</h4>
       <input id="fecha" type="data" class="form-control" name="fecha" value="{{fecha}}" hidden>
 
-
       <!-- <div class="col-6 offset-2"> -->
       <div class="rounded p-1 text-black ">
         <!-- <form action="/new_order" method="put" class="rounded p-1 text-black "> -->
-        <div class="border border-2 border-dark ps-2 pe-2">
+        <form action="/order_rectify" method="post">
+          <div class="border border-2 border-dark ps-2 pe-2">
 
-          <div class=" ">
-            <input id="id_orden" type="number" class="form-control" name="id_orden" value={{orden}} hidden>
-          </div>
+            <div class=" ">
+              <input id="id_orden" type="number" class="form-control" name="id_orden" value={{orden}} hidden>
+            </div>
 
-          <div class=" ">
-            <input id="school_id" type="number" class="form-control" name="school_id" value={{school.id}} hidden>
-          </div>
+            <div class=" ">
+              <input id="school_id" type="number" class="form-control" name="school_id" value={{school.id}} hidden>
+            </div>
 
-          <div class="d-flex justify-content-between">
-            <div class="mt-2 d-flex justify-content-between">
-              <!-- <label for="" class="form-label">
+            <div class="d-flex justify-content-between">
+              <div class="mt-2 d-flex justify-content-between">
+                <!-- <label for="" class="form-label">
               </label> -->
-              <input style="width: 200px;" min="0" max="{{vegetarian}}" id="vegetarian" type="number" class="form-control border border-2 border-dark"
-                name="vegetarianos" placeholder="M.Vegetarianos">
-              <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{vegetarian}}</span>
+                <input style="width: 200px;" min="0" max="{{vegetarianos}}" id="vegetarianos" type="number"
+                  class="form-control border border-2 border-dark" name="vegetarianos" placeholder="M.Vegetarianos">
+                <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{vegetarianos}}</span>
+              </div>
+
+              <div class=" mt-2 d-flex justify-content-between">
+                <input style="width: 200px;" min="0" max="{{calorico}}" id="calorico" type="number"
+                  class="form-control border border-2 border-dark" name="calorico" placeholder="M.Calórico">
+                <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{calorico}}</span>
+              </div>
             </div>
 
-            <div class=" mt-2 d-flex justify-content-between">
-              <input style="width: 200px;" min="0" max="{{caloric}}" id="caloric" type="number" class="form-control border border-2 border-dark" name="calorico"
-                placeholder="M.Calórico">
-              <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{caloric}}</span>
+            <div class="d-flex justify-content-between">
+              <div class="mt-2 d-flex justify-content-between ">
+                <input style="width: 200px;" min="0" max="{{celiacos}}" id="celiacos" type="number"
+                  class="form-control border border-2 border-dark" name="celiacos" placeholder="M.Celiacos">
+                <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{celiacos}}</span>
+              </div>
+
+              <div class="mt-2 d-flex justify-content-between ">
+                <input style="width: 200px;" min="0" max="{{autoctono}}" id="autoctono" type="number"
+                  class="form-control border border-2 border-dark" name="autoctono" placeholder="M.Autóctono">
+                <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{autoctono}}</span>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <div class=" mt-2 d-flex justify-content-between">
+                <input style="width: 200px;" min="0" max="{{estandar}}" id="estandar" type="number"
+                  class="form-control border border-2 border-dark" name="estandar" placeholder="M.Estándar">
+                <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{estandar}}</span>
+              </div>
+            </div>
+
+            <div class="mt-3 col-12 col-md-6">
+              <textarea id="observations" class="form-control border border-2 border-dark" maxlength="15"
+                name="observaciones" placeholder="Observaciones"></textarea>
+            </div>
+
+            <div class="d-flex justify-content-end mb-2 mt-2">
+              <!-- <button name="rectificar" id="rectificar" class="btn btn-outline-primary"
+                onclick="updateOrden()">Rectificar</button> -->
+                <button type="submit" class="btn btn-outline-primary">Rectificar</button>
+              <!-- <button type="submit" name="rectificar" id="rectificar" class="btn btn-outline-primary" >Rectificar</button> -->
+              <!-- onclick="updateOrden()" -->
             </div>
           </div>
+        </form>
 
-          <div class="d-flex justify-content-between">
-            <div class="mt-2 d-flex justify-content-between ">
-              <input style="width: 200px;" min="0" max="{{celiac}}" id="celiac" type="number" class="form-control border border-2 border-dark" name="celiacos"
-                placeholder="M.Celiacos">
-              <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{celiac}}</span>
-            </div>
-
-            <div class="mt-2 d-flex justify-content-between ">
-              <input style="width: 200px;" min="0" max="{{ethnic}}" id="ethnic" type="number" class="form-control border border-2 border-dark" name="autoctono"
-                placeholder="M.Autóctono">
-              <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{ethnic}}</span>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6">
-            <div class=" mt-2 d-flex justify-content-between">
-              <input style="width: 200px;" min="0" max="{{standard}}" id="standard" type="number" class="form-control border border-2 border-dark" name="estandar"
-                placeholder="M.Estándar">
-              <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{standard}}</span>
-            </div>
-          </div>
-
-          <div class="mt-3 col-12 col-md-6">
-            <textarea id="observations" class="form-control border border-2 border-dark" maxlength="15" name="observaciones"
-              placeholder="Observaciones"></textarea>
-          </div>
-
-          <div class="d-flex justify-content-end mb-2 mt-2">
-            <button name="rectificar" id="rectificar" class="btn btn-outline-primary"
-              onclick="updateOrden()">Rectificar</button>
-            <!-- <button type="submit" name="rectificar" id="rectificar" class="btn btn-outline-primary" >Rectificar</button> -->
-            <!-- onclick="updateOrden()" -->
-          </div>
-        </div>
       </div>
 
     </div>
   </div>
 </div>
-
-<script>
-  /* const agregarlikes = async (ev, id) => {
-    ev.preventDefault()
-
-    console.log('id ', id);
-
-    const h6_lk = document.getElementById(`lkk${id}`)
-
-    // let num_likes = parseInt(span_memsaje.innerHTML)
-    let num_likes = parseInt(h6_lk.innerHTML)
-
-    num_likes++
-    h6_lk.innerHTML = num_likes
-    await fetch(`/like/${id}`, {
-      method: "POST",
-      body: JSON.stringify({
-        id,
-      }),
-    })
-  } */
-
-
-  const updateOrden = async () => {
-    console.log('updateOrden')
-    const fecha = document.querySelector("#fecha").value
-    console.log('fecha ', fecha)
-
-    const id_orden = document.querySelector("#id_orden").value
-    console.log('id_orden' , id_orden)
-    const observaciones = document.querySelector("#observations").value
-    const vegetariano = document.querySelector("#vegetarian").value
-    const celiacos = document.querySelector("#celiac").value
-    const estandar = document.querySelector("#standard").value
-    const calorico = document.querySelector("#caloric").value
-    const autoctono = document.querySelector("#ethnic").value
-
-    console.log('id_orden script' , id_orden) //
-    console.log('vegetariano script' , vegetariano) //
-    await fetch("http://localhost:8000/new_order?id=" + id_orden, {
-      method: "PUT",
-      body: JSON.stringify({
-        observaciones,
-        vegetariano,
-        celiacos,
-        estandar,
-        calorico,
-        autoctono
-      }),
-    })
-
-    location.href = '/' // recargar e ir a home
-
-  };
-</script>
 {% endblock %}
