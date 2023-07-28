@@ -7,9 +7,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link {% if ruta == '/' %}active{% endif %}" aria-current="page" href="/">Home</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <!-- <a class="btn_add nav-link {% if ruta == '/new_order' %}active{% endif %}" href="/orders/new" hidden>Ingresar datos</a> -->
           <a class="btn_add nav-link {% if ruta == '/new_order' %}active{% endif %}" href="/new_order" hidden>Ingresar datos</a>
@@ -24,13 +24,13 @@
     </div>
   </div>
 </nav>
+{% endmacro %}
 <script>
   const us = document.querySelector('.usuario')
   console.log('user')
-  if (us.innerHTML == true) {
+  if (us.innerHTML == 1) {
     console.log('true')
     const bton_add = document.querySelector('.btn_add')
     bton_add.removeAttribute('hidden')
   }
 </script>
-{% endmacro %}

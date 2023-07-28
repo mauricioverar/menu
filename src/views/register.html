@@ -4,15 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login menu_escolar</title>
+  <title>Register menu_escolar</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <!-- <link rel="stylesheet" href="css/styles.css"> -->
+  <!-- <link rel="stylesheet" href="/css/styles.css"> -->
   <style>
     form {
       border-radius: 2rem;
-    }
-    .visit {
-      font-size: x-large;
     }
   </style>
 </head>
@@ -28,25 +25,31 @@
     {% endif %}
     <div class="row">
       <div class="col-12 col-md-4 offset-md-4">
-        <h3 class="text-center text-primary mt-5">Log in</h3>
-        <form action="/login" method="post" class="bg-secondary bg-opacity-50 mt-4 p-4 text-white">
+        <h3 class="text-center text-primary mt-5">Register</h3>
+        <form action="/register" method="post" class="bg-secondary bg-opacity-50 mt-4 p-4 text-white">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">School Name</label>
+            <input type="text" class="form-control" name="name" required>
+          </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email</label>
             <input type="email" class="form-control" name="email" required>
           </div>
-          <div class="mb-3 mb-4">
+          <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" class="form-control" name="password" required>
           </div>
+          <div class="mb-3 mb-4">
+            <label for="exampleInputPassword1" class="form-label">Repeat Password </label>
+            <input type="password" class="form-control" name="password_repeat" required>
+          </div>
           <button type="submit" class="btn btn-primary float-end">Ok</button>
-          <p><a href="/register" class="auth-text text-primary">Register</a><a href="/" class="visit ms-5 auth-text text-primary">Visit</a></p>
-          <!-- <p><a href="/register" class="auth-text text-primary">Register</a></p> -->
-          
+          <p><a href="/login" class="auth-text text-primary">Login</a></p>
         </form>
       </div>
     </div>
   </div>
   <script src="/js/bootstrap.bundle.min.js"></script>
-  <!-- <script src="/js/scripts.js"></script> -->
+  <script src="/js/scripts.js"></script>
 </body>
 </html>

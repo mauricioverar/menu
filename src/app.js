@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url' //el objeto de URL para convertir en una rut
 import {APP_NAME} from "./config.js"
 import auth from "./routes/auth.js"
 // import index from "./routes/index.js"
-import new_order from "./routes/new_order.js" // no usar new solo (palabra reservada)
+// import new_order from "./routes/new_order.js" // no usar new solo (palabra reservada)
 
 const app = express()
 
@@ -42,7 +42,7 @@ nunj_env.addGlobal('app_name', APP_NAME) // app_name var global *****
 // Routes
 app.use("/", auth) //index
 // app.use("/", index) //index
-app.use('/', new_order) //orders (prefijo) , pierde bootstrap
+// app.use(new_order) //'/',  //orders (prefijo) , pierde bootstrap
 
 /* app.use("/api", jobs); // prefijo
 app.use("/api/auth", auth); // signup y signin *** */

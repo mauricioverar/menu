@@ -4,14 +4,14 @@ let msg = ''
 let is_admin = 0
 
 // logearse ingresar ***** buscar user
-export const get_schools = async (req, res) => {
-  console.log('get_school')
+/* export const get_orders = async (req, res) => {
+  console.log('get_order')
   try {
     const email = req.body.email.trim()
     const password = req.body.pass.trim()
 
     const [user_find] = await pool.query(
-      "select * from schools where email=?",
+      "select * from orders where email=?",
       [email]
     )
 
@@ -52,14 +52,14 @@ export const get_schools = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-};
+}; */
 
-export async function get_school(email) {
+export async function get_order(email) {
   console.log('ver email')
 
   try {
     const [rows] = await pool.query(
-      `select * from schools where email = ?`,
+      `select * from orders where email = ?`,
       [email]
     )
     console.log(rows[0])
@@ -73,45 +73,45 @@ export async function get_school(email) {
     console.log(error);
   }
 }
-export async function get_school_name(name) {
-  console.log('ver name')
+
+export async function create_order(date, is_rectified, observations, school_id, vegetarianos, celiacos, estandar, calorico, autoctono) {
+  console.log('export create_order ')
+  console.log(date, is_rectified, observations, school_id, vegetarianos, celiacos, estandar, calorico, autoctono)
+  let resp
 
   try {
-    const [rows] = await pool.query(
-      `select * from schools where name = ?`,
-      [name]
+    [resp] = await pool.query(
+      `insert into orders
+      (date, is_rectified, observations, school_id, vegetarian, celiac, standard, caloric, ethnic)
+      values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [date, is_rectified, observations, school_id, vegetarianos, celiacos, estandar, calorico, autoctono]
     )
-    console.log(rows[0])
-    if (rows[0].is_admin == 1) console.log(rows[0].is_admin)
 
-    // 4. retorno el primer usuario, en caso de que exista
-    console.log('ver name ok')
+    // 3. Devuelvo el cliente al pool
 
-    return rows[0]
+    console.log('export create_order ok')
+
+    return resp[0]
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function create_school(name, email, password, is_admin) {
-  console.log('export create_school ')
-  console.log(name, email, password, is_admin)
-  let resp
-
+//to_char(date, 'Mon dd, yyyy') as fecha
+//name,  //join schools on schools(id_school) no es, en mysql es schools.id_school // inner solo los que unen tablas y outer todos de ambas tabas
+export async function get_orders () {
+  console.log('get_orders');
   try {
-    [resp] = await pool.query(
-      `insert into schools (name, email, password, is_admin) values (?, ?, ?, ?)`,
-      [name, email, password, is_admin]
+    const [rows] = await pool.query(
+      `select name, id_order, DATE_FORMAT(date, '%d/%m/%Y')date, is_rectified, observations, school_id, vegetarian, celiac, standard, caloric, ethnic, ped_vegetarian, ped_celiac, ped_standard, ped_caloric, ped_ethnic from orders
+      inner join schools on schools.id_school = orders.school_id order by date`
     )
-
-    // 3. Devuelvo el cliente al pool
-
-    console.log('export create_school ok')
-    console.log(resp.insertId)//[0]) // id
-
-    return resp.insertId
+  
+    // 4. retorno el primer usuario, en caso de que exista
+    console.log(rows)
+    return rows//[0]
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-
+  
 }

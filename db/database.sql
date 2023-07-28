@@ -4,13 +4,35 @@
 
 CREATE TABLE schools (
   id_school INT(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(22) NOT NULL,
-  email VARCHAR(45) DEFAULT NULL,
-  is_admin bit(1) NOT NULL default 0
+  name VARCHAR(22) NOT NULL unique,
+  email VARCHAR(45) unique not NULL,
+  password VARCHAR(99) NOT NULL,
+  is_admin int(1) NOT NULL default 0
 );
 
+drop table schools;
+drop table orders;
 INSERT INTO schools (name, email) values ('a3', 'a@web.cl');
 DELETE FROM schools WHERE is_admin=0;
+
+-- CREATE TABLE IF NOT EXISTS orders (
+CREATE TABLE orders (
+  id_order integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  date date NOT NULL,
+  is_rectified int(1) NOT NULL default 0,
+  observations text,
+  school_id integer NOT NULL references schools(id_school),
+  vegetarian integer,
+  celiac integer,
+  standard integer,
+  caloric integer,
+  ethnic integer,
+  ped_vegetarian integer,
+  ped_celiac integer,
+  ped_standard integer,
+  ped_caloric integer,
+  ped_ethnic integer
+);
 
 CREATE TABLE jobs (
   id_job INT(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,

@@ -4,30 +4,74 @@
 {% block main %}
 {{ navbar('/', school) }}
 <div class="container">
-  <p class="admin text-white me-4" hidden>{{ school.is_admin}}</p>
-  <a class="btn_new nav-link {% if ruta == '/new_order' %}active{% endif %}" href="/new_order" hidden>Nuevo Pedido</a>
+  {% if school.is_admin %}
+  <div>
+    <button class="btn btn-outline-info"><a class="btn_new nav-link {% if ruta == '/new_order' %}active{% endif %}" href="/new_order">Nuevo Pedido</a></button>
+  </div>
+  {% endif %}
+  <!-- <p class="admin text-dark me-4" hidden>{{ school.is_admin}}</p> -->
 </div>
 
 <div class="row">
-  <div class="col-12 border border-3 border-dark mt-4 "  style="height: 600px;overflow: scroll;">
+  <div class="col-12 border border-3 border-dark mt-4 " style="height: 600px;overflow: scroll;">
     <table class="table table-striped ">
       <thead class="sticky-top bg-dark text-white">
         <tr>
           <th scope="col">fecha</th>
           <th scope="col">liceo</th>
-          <th scope="col">menu</th>
+          <th scope="col">M1</th>
+          <th scope="col">M2</th>
+          <th scope="col">M3</th>
+          <th scope="col">M4</th>
+          <th scope="col">M5</th>
           <th scope="col">accion</th>
         </tr>
       </thead>
-      <tbody>        
-        {% for school in schools %}
-          {% if school.liceo %}
+      <tbody>
+        {% for orden in ordenes %}
+          {% if orden.name %}
+            {% if school.is_admin %}
+              {% if orden.is_rectified %}
+              <tr>
+                <td>{{orden.date}}</td>
+                <td>{{orden.name}}</td>
+                <td>{{orden.vegetarian}}</td>
+                <td>{{orden.celiac}}</td>
+                <td>{{orden.standard}}</td>
+                <td>{{orden.caloric}}</td>
+                <td>{{orden.ethnic}}</td>
+                <td>
+                  <button type="submit" class="btn btn-outline-primary">Ver Detalle</button>
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                <td>{{orden.date}}</td>
+                <td>{{orden.name}}</td>
+                <td>{{orden.vegetarian}}</td>
+                <td>{{orden.celiac}}</td>
+                <td>{{orden.standard}}</td>
+                <td>{{orden.caloric}}</td>
+                <td>{{orden.ethnic}}</td>
+                <td>
+                  <button type="submit" class="btn btn-outline-primary">Rectificar</button>
+                </td>
+              </tr>
+              {%endif%}
+            {% else %}
             <tr>
-              <td>{{school.date}}</td>
-              <td>{{school.name}}/3</td>
-              <td>{{school.menu}}%</td>
-              <td>{{school.accion}}%</td>
+              <td>{{orden.date}}</td>
+              <td>{{orden.name}}</td>
+              <td>{{orden.vegetarian}}</td>
+              <td>{{orden.celiac}}</td>
+              <td>{{orden.standard}}</td>
+              <td>{{orden.caloric}}</td>
+              <td>{{orden.ethnic}}</td>
+              <td>
+                <button class="btn btn-outline-info"><a href="/login" class="auth-text text-dark">Login</a></button>
+              </td>
             </tr>
+            {%endif%}
           {%endif%}
         {%endfor%}
       </tbody>
@@ -35,12 +79,4 @@
   </div>
 </div>
 
-<script>
-  const usuario = document.querySelector('.admin')
-  if (usuario.innerHTML == 'false') {
-    console.log(usuario.innerHTML)
-    const bton_new = document.querySelector('.btn_new')
-    bton_new.removeAttribute('hidden')
-  }
-</script>
 {% endblock %}
