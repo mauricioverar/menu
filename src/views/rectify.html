@@ -25,7 +25,7 @@
       <div class="rounded p-1 text-black ">
         <!-- <form action="/new_order" method="put" class="rounded p-1 text-black "> -->
         <form action="/order_rectify" method="post">
-          <div class="border border-2 border-dark ps-2 pe-2">
+          <div class="border border-2 border-dark px-2">
 
             <div class=" ">
               <input id="id_orden" type="number" class="form-control" name="id_orden" value={{orden}} hidden>
@@ -35,8 +35,8 @@
               <input id="school_id" type="number" class="form-control" name="school_id" value={{school.id}} hidden>
             </div>
 
-            <div class="d-flex justify-content-between">
-              <div class="mt-2 d-flex justify-content-between">
+            <div class="d-flex  flex-column">
+              <div class="mt-2 d-flex">
                 <!-- <label for="" class="form-label">
               </label> -->
                 <input style="width: 200px;" min="0" max="{{vegetarianos}}" id="vegetarianos" type="number"
@@ -44,21 +44,21 @@
                 <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{vegetarianos}}</span>
               </div>
 
-              <div class=" mt-2 d-flex justify-content-between">
+              <div class=" mt-2 d-flex">
                 <input style="width: 200px;" min="0" max="{{calorico}}" id="calorico" type="number"
                   class="form-control border border-2 border-dark" name="calorico" placeholder="M.Calórico">
                 <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{calorico}}</span>
               </div>
             </div>
 
-            <div class="d-flex justify-content-between">
-              <div class="mt-2 d-flex justify-content-between ">
+            <div class="d-flex  flex-column">
+              <div class="mt-2 d-flex ">
                 <input style="width: 200px;" min="0" max="{{celiacos}}" id="celiacos" type="number"
                   class="form-control border border-2 border-dark" name="celiacos" placeholder="M.Celiacos">
                 <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{celiacos}}</span>
               </div>
 
-              <div class="mt-2 d-flex justify-content-between ">
+              <div class="mt-2 d-flex">
                 <input style="width: 200px;" min="0" max="{{autoctono}}" id="autoctono" type="number"
                   class="form-control border border-2 border-dark" name="autoctono" placeholder="M.Autóctono">
                 <h6 class="ms-2">Ordenó: </h6><span class="ms-2 me-5"> {{autoctono}}</span>
