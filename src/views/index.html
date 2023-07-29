@@ -3,7 +3,7 @@
 
 {% block main %}
 {{ navbar('/', school) }}
-<div class="container">
+<div class="container body">
   {% if school.is_admin %}
   <div>
     <button class="btn btn-outline-success mt-3"><a class="btn_new nav-link {% if ruta == '/new_order' %}active{% endif %}" href="/new_order">Nuevo Pedido</a></button>
@@ -21,7 +21,7 @@
 
 <div class="row">
   <div class="col-12 border border-3 border-dark mt-4 " style="height: 600px;overflow: scroll;">
-    <table class="table table-striped ">
+    <table class="table table-striped">
       <thead class="sticky-top bg-dark text-white">
         <tr>
           <th scope="col">Fecha</th>
@@ -39,7 +39,7 @@
           {% if orden.name %}
             {% if school.is_admin %}
               {% if orden.is_rectified %}
-              <tr>
+              <tr class=" table-warning">
                 <td>{{orden.date}}</td>
                 <td>{{orden.name}}</td>
                 <td>{{orden.vegetarian}}</td>
@@ -70,7 +70,7 @@
                 </td>
               </tr>
               {% else %}
-              <tr>
+              <tr class=" table-success">
                 <td>{{orden.date}}</td>
                 <td>{{orden.name}}</td>
                 <td>{{orden.vegetarian}}</td>
