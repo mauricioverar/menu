@@ -19,17 +19,17 @@
 
     <div class="col-8 offset-2">
       <h4 class="my-3">Rectificación del pedido {{orden}} (ordenado el {{fecha}})</h4>
-      <input id="fecha" type="data" class="form-control" name="fecha" value="{{fecha}}" hidden>
+      <input id="fecha" type="hidden" class="form-control" name="fecha" value="{{fecha}}" >
       <div class="rounded p-1 text-black ">
         <form action="/order_rectify" method="post">
           <div class="border border-2 border-dark px-2">
 
             <div class=" ">
-              <input id="id_orden" type="number" class="form-control" name="id_orden" value={{orden}} hidden>
+              <input id="id_orden" type="hidden" class="form-control" name="id_orden" value={{orden}} >
             </div>
 
             <div class=" ">
-              <input id="school_id" type="number" class="form-control" name="school_id" value={{school.id}} hidden>
+              <input id="school_id" type="hidden" class="form-control" name="school_id" value={{school.id}} >
             </div>
 
             <div class="d-flex  flex-column">

@@ -52,7 +52,7 @@ router.get("/", async (req, res) => {
   //protected_route,
   console.log("index auth")
   try {
-    const ordenes = await get_orders()
+    const ordenes = await get_orders() 
     if (!ordenes) return res.render("index.html", { school }) // estado inicial *** modi
     console.log(ordenes.length, "ordenes length")
     // let fechas = []

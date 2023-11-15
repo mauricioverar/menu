@@ -12,8 +12,8 @@
       <span class="menu"> M1: </span><span> Vegetariano </span>
       <span class="menu"> M2: </span><span> Celiaco </span>
       <span class="menu"> M3: </span><span> Estandar </span>
-      <span class="menu"> M4: </span><span> Vegetariano </span>
-      <span class="menu"> M5: </span><span> Vegetariano </span>
+      <span class="menu"> M4: </span><span> Calórico </span>
+      <span class="menu"> M5: </span><span> Étnico </span>
     </p>
     <p>
       
@@ -52,22 +52,22 @@
                 <td>{{orden.ethnic}}</td>
                 <td>
                   <form action="/detalle" method="post">
-                    <input id="orden" type="number" class="form-control" name="orden" value={{orden.id_order}} hidden>
-                    <input id="fecha" type="text" class="form-control" name="fecha" value="{{orden.dateformat}}" hidden>
+                    <input id="orden" type="hidden" class="form-control" name="orden" value={{orden.id_order}} >
+                    <input id="fecha" type="hidden" class="form-control" name="fecha" value="{{orden.dateformat}}" >
                     
-                    <input type="text" class="form-control" name="observations" value="{{orden.observations}}" hidden>
+                    <input type="hidden" class="form-control" name="observations" value="{{orden.observations}}" >
       
-                    <input type="number" class="form-control" name="vegetarian" value={{orden.vegetarian}} hidden>
-                    <input type="number" class="form-control" name="celiac" value={{orden.celiac}} hidden>
-                    <input type="number" class="form-control" name="standard" value={{orden.standard}} hidden>
-                    <input type="number" class="form-control" name="caloric" value={{orden.caloric}} hidden>
-                    <input type="number" class="form-control" name="ethnic" value={{orden.ethnic}} hidden>
+                    <input type="hidden" class="form-control" name="vegetarian" value={{orden.vegetarian}} >
+                    <input type="hidden" class="form-control" name="celiac" value={{orden.celiac}} >
+                    <input type="hidden" class="form-control" name="standard" value={{orden.standard}} >
+                    <input type="hidden" class="form-control" name="caloric" value={{orden.caloric}} >
+                    <input type="hidden" class="form-control" name="ethnic" value={{orden.ethnic}} >
 
-                    <input type="number" class="form-control" name="ped_vegetarian" value={{orden.ped_vegetarian}} hidden>
-                    <input type="number" class="form-control" name="ped_celiac" value={{orden.ped_celiac}} hidden>
-                    <input type="number" class="form-control" name="ped_standard" value={{orden.ped_standard}} hidden>
-                    <input type="number" class="form-control" name="ped_caloric" value={{orden.ped_caloric}} hidden>
-                    <input type="number" class="form-control" name="ped_ethnic" value={{orden.ped_ethnic}} hidden>
+                    <input type="hidden" class="form-control" name="ped_vegetarian" value={{orden.ped_vegetarian}} >
+                    <input type="hidden" class="form-control" name="ped_celiac" value={{orden.ped_celiac}} >
+                    <input type="hidden" class="form-control" name="ped_standard" value={{orden.ped_standard}} >
+                    <input type="hidden" class="form-control" name="ped_caloric" value={{orden.ped_caloric}} >
+                    <input type="hidden" class="form-control" name="ped_ethnic" value={{orden.ped_ethnic}} >
       
                     <button type="submit" class="btn btn-outline-primary">Detalle</button>
       
@@ -85,14 +85,14 @@
                 <td>{{orden.ethnic}}</td>
                 <td>
                   <form action="/rectify" method="post">
-                    <input id="orden" type="number" class="form-control" name="orden" value={{orden.id_order}} hidden>
-                    <input id="fecha" type="text" class="form-control" name="fecha" value="{{orden.dateformat}}" hidden>
+                    <input id="orden" type="hidden" class="form-control" name="orden" value={{orden.id_order}} >
+                    <input id="fecha" type="hidden" class="form-control" name="fecha" value="{{orden.dateformat}}" >
       
-                    <input type="number" class="form-control" name="vegetarian" value={{orden.vegetarian}} hidden>
-                    <input type="number" class="form-control" name="celiac" value={{orden.celiac}} hidden>
-                    <input type="number" class="form-control" name="standard" value={{orden.standard}} hidden>
-                    <input type="number" class="form-control" name="caloric" value={{orden.caloric}} hidden>
-                    <input type="number" class="form-control" name="ethnic" value={{orden.ethnic}} hidden>
+                    <input type="hidden" class="form-control" name="vegetarian" value={{orden.vegetarian}} >
+                    <input type="hidden" class="form-control" name="celiac" value={{orden.celiac}} >
+                    <input type="hidden" class="form-control" name="standard" value={{orden.standard}} >
+                    <input type="hidden" class="form-control" name="caloric" value={{orden.caloric}} >
+                    <input type="hidden" class="form-control" name="ethnic" value={{orden.ethnic}} >
       
                     <button type="submit" class="btn btn-outline-primary">Rectificar</button>
       
