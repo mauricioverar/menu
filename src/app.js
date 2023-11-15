@@ -15,8 +15,8 @@ const app = express()
 
 const __filename = fileURLToPath(import.meta.url) //obtenga el nombre del archivo con la ruta absoluta completa del archivo
 const __dirname = path.dirname(__filename) //Obtiene el nombre completo del directorio donde se encuentra el archivo
-console.log('ruta comp arch', __filename) //C:\Users\mao\Desktop\menu\src\app.js
-console.log('directorio del arch', __dirname) //C:\Users\mao\Desktop\menu\src
+// console.log('ruta comp arch', __filename) // E:\Apps\MisWebs\menu\src\app.js
+// console.log('directorio del arch', __dirname) // E:\Apps\MisWebs\menu\src
 
 // Middlewares
 app.use(morgan("dev")) // ver datos en consola
@@ -49,7 +49,8 @@ app.use("/api/auth", auth); // signup y signin *** */
 
 // ruta no existe
 app.use((req, res, next) => {
-  res.status(404).json({ message: "Not found" });
+  // res.status(404).json({ message: "Not found" });
+  res.render("404.html")
 });
 
 export default app;

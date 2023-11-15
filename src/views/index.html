@@ -43,7 +43,7 @@
             {% if school.is_admin %}
               {% if orden.is_rectified %}
               <tr class=" table-warning">
-                <td>{{orden.date}}</td>
+                <td>{{orden.dateformat}}</td>
                 <td>{{orden.name}}</td>
                 <td>{{orden.vegetarian}}</td>
                 <td>{{orden.celiac}}</td>
@@ -53,7 +53,9 @@
                 <td>
                   <form action="/detalle" method="post">
                     <input id="orden" type="number" class="form-control" name="orden" value={{orden.id_order}} hidden>
-                    <input id="fecha" type="text" class="form-control" name="fecha" value="{{orden.date}}" hidden>
+                    <input id="fecha" type="text" class="form-control" name="fecha" value="{{orden.dateformat}}" hidden>
+                    
+                    <input type="text" class="form-control" name="observations" value="{{orden.observations}}" hidden>
       
                     <input type="number" class="form-control" name="vegetarian" value={{orden.vegetarian}} hidden>
                     <input type="number" class="form-control" name="celiac" value={{orden.celiac}} hidden>
@@ -74,7 +76,7 @@
               </tr>
               {% else %}
               <tr class=" table-success">
-                <td>{{orden.date}}</td>
+                <td>{{orden.dateformat}}</td>
                 <td>{{orden.name}}</td>
                 <td>{{orden.vegetarian}}</td>
                 <td>{{orden.celiac}}</td>
@@ -84,7 +86,7 @@
                 <td>
                   <form action="/rectify" method="post">
                     <input id="orden" type="number" class="form-control" name="orden" value={{orden.id_order}} hidden>
-                    <input id="fecha" type="text" class="form-control" name="fecha" value="{{orden.date}}" hidden>
+                    <input id="fecha" type="text" class="form-control" name="fecha" value="{{orden.dateformat}}" hidden>
       
                     <input type="number" class="form-control" name="vegetarian" value={{orden.vegetarian}} hidden>
                     <input type="number" class="form-control" name="celiac" value={{orden.celiac}} hidden>
@@ -100,7 +102,7 @@
               {%endif%}
             {% else %}
             <tr>
-              <td>{{orden.date}}</td>
+              <td>{{orden.dateformat}}</td>
               <td>{{orden.name}}</td>
               <td>{{orden.vegetarian}}</td>
               <td>{{orden.celiac}}</td>

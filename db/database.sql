@@ -3,11 +3,11 @@
 -- USE menu_escolar;
 
 CREATE TABLE schools (
-  id_school INT(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(22) NOT NULL unique,
+  id_school INT(3) NOT NULL AUTO_INCREMENT PRIMARY KEY, -- INT(8)
+  name VARCHAR(22) NOT NULL unique, -- text
   email VARCHAR(45) unique not NULL,
   password VARCHAR(99) NOT NULL,
-  is_admin int(1) NOT NULL default 0
+  is_admin int(1) NOT NULL default 0 -- bool false
 );
 
 drop table schools;
@@ -17,11 +17,11 @@ DELETE FROM schools WHERE is_admin=0;
 
 -- CREATE TABLE IF NOT EXISTS orders (
 CREATE TABLE orders (
-  id_order integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_order integer NOT NULL AUTO_INCREMENT PRIMARY KEY, -- INT(8)
   date date NOT NULL,
-  is_rectified int(1) NOT NULL default 0,
+  is_rectified int(1) NOT NULL default 0, -- bool false
   observations text,
-  school_id integer NOT NULL references schools(id_school),
+  school_id integer NOT NULL references schools(id_school), -- public.schools.id_school
   vegetarian integer,
   celiac integer,
   standard integer,

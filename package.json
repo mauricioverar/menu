@@ -21,6 +21,7 @@
     "moment": "^2.29.4",
     "mysql2": "^3.5.2",
     "nunjucks": "^3.2.4",
+    "pg": "^8.11.3",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
