@@ -1,6 +1,6 @@
 import express from "express"
 import morgan from "morgan"
-import helmet from "helmet"
+// import helmet from "helmet"
 import favicon from "serve-favicon"
 import nunjucks from "nunjucks" //usar templates
 import path from "path" //para trabajar con rutas de archivos y directorios
@@ -22,7 +22,7 @@ const __dirname = path.dirname(__filename) //Obtiene el nombre completo del dire
 app.use(morgan("dev")) // ver datos en consola
 app.use(express.json()) // interpretar json
 app.use(express.urlencoded({extended: true})) // se configura uso de formularios
-app.use(helmet()) // ocultar info sobre versiones y validar
+// app.use(helmet()) // ocultar info sobre versiones y validar
 
 // se configuran archivos estáticos
 app.use(express.static('./node_modules/bootstrap/dist'))
